@@ -1,0 +1,9 @@
+If you already have node and npm
+
+start of with 
+    'npm init'
+    Change the main depending on what the name of your entry server script. I used server.js so it will be 'server.js'
+    Then I will change the start which is the command to start the application to 'node server.js'
+
+install packages
+    npm install -s express ==> -s is important so it will save to your package.json
