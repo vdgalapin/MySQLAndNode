@@ -7,3 +7,10 @@ start of with
 
 install packages
     npm install -s express ==> -s is important so it will save to your package.json
+
+    npm install -s mysql 
+
+    npm install -s ejs ==> for default view engine
+
+if you want to move page to page it has to be ejs.
+    you have to put this pages in a folder name view for ejs to work
