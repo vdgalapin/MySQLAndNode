@@ -17,7 +17,7 @@ var con = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "Basketball41Mavericks!",
-    database: "practice"
+    database: "njandms_proj"
 })
 
 // Create a port for the website that will run on
@@ -32,13 +32,25 @@ app.get('/', function(req, res) {
 });
 
 app.get('/profiles', function(req,res) {
-    con.query('SELECT * FROM profile', function(err, result) {
-        if (err) {
-            console.log("Error in");
-            throw err;
-        } 
-        res.render('pages/profiles', {data: result});
-    })
+
+    var username = req.query['username'];
+    var password = req.query['password'];
+
+    if (password == '' ||username == '') {
+        return res.redirect('/')
+    } else {
+        var query = "SELECT * FROM login where username = '" + username + "' and password = '" + password + "'"; 
+        con.query(query, function(err, result) {
+            if (err) {
+                console.log(err);
+                return res.redirect('/')
+            } 
+            res.render('pages/profiles', {data: result});
+        })
+    }
+
+
+    
     
 });
 

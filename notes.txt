@@ -14,3 +14,8 @@ install packages
 
 if you want to move page to page it has to be ejs.
     you have to put this pages in a folder name view for ejs to work
+
+install nodemon for automatically reload the node js app   
+    npm install nodemon
+
+    change the script in package.json to nodemon whateverapp.js
