@@ -7,16 +7,14 @@
         <title>Profiles Database</title>
     </head>
     <body>
-        <div>Profile</div>
         <table>
             <tbody>
-                <% if(data.length) {
-                    for(var i = 0; i  < data.length; i++) { %>
+                <% if(data.length) { %>
                     <tr>
-                        <td><%= data[i].username %></td>
-                        <td><%= data[i].password %></td>
+                        <tr>
+                            <p>Welcome <%= data[0].username %> !</p>
+                        </tr>
                     </tr>
-                    <% } %>
                 <% } else { %>
                     <tr>
                         <tr>

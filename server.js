@@ -1,12 +1,32 @@
 // To load node modules
 var express = require('express');
 
+// for session - login system 04052023
+var session = require('express-session');
+
+// for flash messages 04052023
+var flash = require('connect-flash');
 
 // Set mysql
 var mysql = require('mysql')
 
 // Initialize express
 var app = express();
+
+// Create session 04052023
+app.use(session({
+    secret: 'login_session',
+    resave: true,
+    saveUninitialized: true // prevents the browser from using empty session
+}))
+
+// Allow the app to use flash 04052023
+app.use(flash());
+//  // middleware
+// app.use((req, res, next) => {
+//     res.locals.message = req.flash("message");
+//     next();
+//   });
 
 // Use as the default view engine
 app.set('view engine', 'ejs')
@@ -28,10 +48,12 @@ app.listen(port, () => {
 
 // Intitial page
 app.get('/', function(req, res) {
-    res.sendFile('index.html', {root: __dirname});
+    req.flash('message', 'Welcome!');
+    res.render('pages/index');
 });
 
 app.get('/profiles', function(req,res) {
+
 
     var username = req.query['username'];
     var password = req.query['password'];
@@ -43,9 +65,16 @@ app.get('/profiles', function(req,res) {
         con.query(query, function(err, result) {
             if (err) {
                 console.log(err);
+                // req.flash('Cannot connect to the database!')
                 return res.redirect('/')
             } 
-            res.render('pages/profiles', {data: result});
+            if (result.length > 0) {
+                res.render('pages/profiles', {data: result, message: res.locals.message});
+            } else {
+                // req.flash('No profile found!')
+                return res.redirect('/')
+            }
+            
         })
     }
 
@@ -54,5 +83,3 @@ app.get('/profiles', function(req,res) {
     
 });
 
-
-// module.exports = router;

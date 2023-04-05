@@ -3,7 +3,7 @@ If you already have node and npm
 start of with 
     'npm init'
     Change the main depending on what the name of your entry server script. I used server.js so it will be 'server.js'
-    Then I will change the start which is the command to start the application to 'node server.js'
+    Then I will change the start which is the command to start the application to 'node server.js' in the scripts with start
 
 install packages
     npm install -s express ==> -s is important so it will save to your package.json
@@ -18,4 +18,13 @@ if you want to move page to page it has to be ejs.
 install nodemon for automatically reload the node js app   
     npm install nodemon
 
-    change the script in package.json to nodemon whateverapp.js
+    change the script start in package.json to nodemon whateverapp.js
+
+To display flash message in nodejs using connect-flash. It will also required express-session.
+    npm install -s express-session  == first
+    npm install -s connect-flash    == second
+
+    // So its not going to work
+    "Flash messages" are used to carry a message over to the next request, and most of the time the only reason is the post-request-get pattern. 
+    If you just want to show a message to the user on the same page, while not doing a redirect, you don't need a library for it. Just pass the 
+    message to the template as data.
