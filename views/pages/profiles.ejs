@@ -10,9 +10,14 @@
         <table>
             <tbody>
                 <tr>
-                    <td> Welcome <%= username %></td>
+                    <td> Welcome</td>
                 </tr>
             </tbody>
         </table>
     </body>
+    <script>
+        var url = new URL(window.location.href).searchParams;
+        console.log(url.get("username"));
+        
+    </script>
 </html>  

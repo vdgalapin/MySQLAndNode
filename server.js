@@ -82,15 +82,18 @@ app.post('/login', function(req, res) {
                 if (error) {
                     res.render('pages/login');
                 } else {
-                  
-                    // return res.redirect(url.format({
-                    //     pathname: "/profiles",
-                    //     query: {
-                    //         "username": username,
-                    //         "created": datecreated
-                    //     }
-                    // }));
-                    res.render('pages/profiles', {username: username});
+                    let array = JSON.stringify(['test1', 'test2']);
+                    return res.redirect(url.format({
+                        pathname: "/profiles",
+                        query: {
+                            "username": username,
+                            "created": datecreated,
+                            "array": array
+                        }
+                    }));
+                    // res.render('pages/profiles', {username: username});
+                    // const query = querystring
+                    // return res.redirect('/profiles', {username: username});
                 }
             } else {
                 console.log('No profile found for ' + username);
@@ -132,7 +135,7 @@ app.post('/signup', function(req, res) {
                     res.render('pages/signup');
                 } else {
                     // return res.redirect('/login');
-                    res.render('pages/login')
+                    // res.render('pages/login')
                 }
             }
         });
