@@ -28,3 +28,68 @@ To display flash message in nodejs using connect-flash. It will also required ex
     "Flash messages" are used to carry a message over to the next request, and most of the time the only reason is the post-request-get pattern. 
     If you just want to show a message to the user on the same page, while not doing a redirect, you don't need a library for it. Just pass the 
     message to the template as data.
+
+
+https://www.makeuseof.com/nodejs-bcrypt-hash-verify-salt-password/
+// This is where I will be hashing my password
+
+    npm install -s bcrypt
+
+    const bcrypt = require('bcrypt')
+
+    bcrypt.genSalt() -- allows to  generate hash randomly
+    bcrypt.genSalt(10, (err, sal) => {
+        bcrypt.hash(thepassword, salt, function(err, hashpassword) {
+
+        }); -- Hash the password
+    })
+
+    -- combine salt and hashing.
+    bcrypt.hash(thepassword, 10, function(err, hashpassword) {
+
+    });
+
+    -- to compare or authenticate password
+    bcrypt.compare(thepassword, hashpassword, function(err, resut) {
+        if(result) {
+
+        }
+    })
+
+    -- using async which means you can do it all at  once. It is a non-blocking, which means it will send multiple request to a server.
+    async function hashPassword(thepassword) {  
+        const hash = await bcrypt.hash(thepassword, 10);
+        // store it to database
+    }
+
+    async function comparePassword(thepassword, hash) {
+        const result = await bcrypt.compare(thepassword, hash);
+        if(result) {
+
+        }
+    }
+
+    -- using promise which is a proxy fo a value not necessarily known when the promise is created. It allows you to associate handles wih an asychronous 
+        action's eventual success value or failure reason.
+    function hashPassword(thepassword) {
+        bcrypt.hash(thepassword, 10)
+        .then(hashpassword => {
+            // store password
+        })
+        .catch(err => {
+            // error
+        })
+    }
+
+    function comparePassword(thepassword, hashpassword) {
+        bcrypt.compare(thepassword, hashpassword)
+        .then(result => {
+
+        })
+        .catch(err => {
+
+        })
+    }
+
+
+install url to generate the query string to pass data

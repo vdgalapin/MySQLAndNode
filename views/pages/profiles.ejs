@@ -9,20 +9,9 @@
     <body>
         <table>
             <tbody>
-                <% if(data.length) { %>
-                    <tr>
-                        <tr>
-                            <p>Welcome <%= data[0].username %> !</p>
-                        </tr>
-                    </tr>
-                <% } else { %>
-                    <tr>
-                        <tr>
-                            <p>No Profiles Found</p>
-                        </tr>
-                    </tr>
-                <% } %>
-
+                <tr>
+                    <td> Welcome <%= username %></td>
+                </tr>
             </tbody>
         </table>
     </body>
