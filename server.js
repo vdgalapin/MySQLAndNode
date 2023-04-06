@@ -83,14 +83,15 @@ app.post('/login', function(req, res) {
                     res.render('pages/login');
                 } else {
                     let array = JSON.stringify(['test1', 'test2']);
-                    return res.redirect(url.format({
-                        pathname: "/profiles",
-                        query: {
-                            "username": username,
-                            "created": datecreated,
-                            "array": array
-                        }
-                    }));
+                    return res.redirect("/profiles?username=" + encodeURIComponent(username)+"&created="+encodeURIComponent(datecreated)+"&array="+encodeURIComponent(array))
+                    // return res.redirect(url.format({
+                    //     pathname: "/profiles",
+                    //     query: {
+                    //         "username": username,
+                    //         "created": datecreated,
+                    //         "array": array
+                    //     }
+                    // }));
                     // res.render('pages/profiles', {username: username});
                     // const query = querystring
                     // return res.redirect('/profiles', {username: username});
