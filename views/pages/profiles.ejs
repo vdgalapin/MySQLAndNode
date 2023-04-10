@@ -4,20 +4,30 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="#">
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/style.css">
         <title>Profiles Database</title>
     </head>
     <body>
-        <table>
-            <tbody>
-                <tr>
-                    <td> Welcome</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="container">
+            <div align="center">
+                <form action="/profiles" method="post">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td> Welcome <span id="username"></span></td>
+                                <td><button>logout</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
     </body>
     <script>
         var url = new URL(window.location.href).searchParams;
         console.log(url.get("username"));
+        document.getElementById("username").innerHTML = url.get("username");
         
     </script>
 </html>  

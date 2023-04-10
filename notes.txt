@@ -21,7 +21,8 @@ install nodemon for automatically reload the node js app
     change the script start in package.json to nodemon whateverapp.js
 
 To display flash message in nodejs using connect-flash. It will also required express-session.
-    npm install -s express-session  == first
+    npm install -s express-session  == first 
+        a server side framework use to create and manage a session middleware.
     npm install -s connect-flash    == second
 
     // So its not going to work
@@ -50,7 +51,7 @@ https://www.makeuseof.com/nodejs-bcrypt-hash-verify-salt-password/
     });
 
     -- to compare or authenticate password
-    bcrypt.compare(thepassword, hashpassword, function(err, resut) {
+    bcrypt.compare(thepassword, hashpassword, function(err, result) {
         if(result) {
 
         }
@@ -91,5 +92,16 @@ https://www.makeuseof.com/nodejs-bcrypt-hash-verify-salt-password/
         })
     }
 
+    if you want to make comparepassword as sync you need to use comparesync(password, hash);
+    which returns a boolean.
+        var result = compareSyn(password, hash);
+        if(result) { }
+
 
 install url to generate the query string to pass data
+
+
+cookie-parser - it is used to parse the cookie header to store data 
+    on the browser after the server side session
+
+    npm install -s cookie-parser

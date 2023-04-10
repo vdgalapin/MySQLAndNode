@@ -13,20 +13,41 @@ var mysql = require('mysql');
 // initialize bcrypt 04062023  
 var bcrypt = require('bcrypt');
 
+// 04062023
+var cookieParser = require('cookie-parser');
+
+
+// 04072023
+var path = require('path');
+
 // initialize url 04062023
-var url = require('url');
+// var url = require('url');
 
 // Initialize express
 var app = express();
+
+// It parses incoming request with JSON payload and is based on body-parser 04062023
+app.use(express.json());
 // use to initialize the epxress to parse JSON data to ge the form data 04062023
+// It parse incoming url-encoded payloads and is based on a body parser 
 app.use(express.urlencoded({extended: true})); 
+
+// to use static files like for css, js in the public folder 04062023
+app.use(express.static('public'));
+
+// Set the cookie-parser so that server can access necessary option to save, read, and access a cookie
+app.use(cookieParser());
 
 // Create session 04052023
 app.use(session({
-    secret: 'login_session',
-    resave: true,
-    saveUninitialized: true // prevents the browser from using empty session
+    secret: '80rnin194nC1ty', // random key to aunthenticate a session. This is stored in environment variable and cant be exposed to the public
+    resave: false, // enbales to store back to the session store even if the session was never modified during the request
+    saveUninitialized: true, // prevents the browser from using empty session. Allow session to be sent to the store
+    cookie: {maxAge: 3600000 } // By Millisecond. Browser will dete cookie after the set duration elapse
 }))
+
+var session; // a variable to save a session
+
 
 // Allow the app to use flash 04052023
 app.use(flash());
@@ -39,6 +60,12 @@ app.use(flash());
 // Use as the default view engine
 app.set('view engine', 'ejs')
 
+// use bootstrap 04072023
+app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')));
+app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')));
+app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')));
+
+app.use(express.static('public'));
 
 // Create the mysql connection
 var con = mysql.createConnection({
@@ -55,46 +82,41 @@ app.listen(port, () => {
 });
 
 // login page
-app.get('/login', function(req, res) {
-        res.render('pages/login');
+app.get('/', function(req, res) {
+    // to remove session
+    req.session.destroy();
+    res.render('pages/login');
 });
 
 // loggin in
-app.post('/login', function(req, res) {
+app.post('/', function(req, res) {
 
+    // this is possible because of express.urlencoded
     var username = req.body['username'];
     var password = req.body['password'];
-
+    
     if (password == '' ||username == '') {
         res.render('pages/login');
     } else {
         var query = "SELECT password, created FROM login where username = '" + username + "' LIMIT 1;"; 
         con.query(query, function(err, result) {
             if (err) {
-                console.log(err);
+                ErrorAudit(err);
                 res.render('pages/login');
             } 
             if (result.length > 0) {
                 var hashpassword = result[0]['password'];
-                var datecreated = result[0]['created'];
-                // console.log('password: ' + password  + '   hash password: ' + hashpassword);     
-                var error = comparePassword(password, hashpassword);
-                if (error) {
-                    res.render('pages/login');
-                } else {
+                var datecreated = result[0]['created'];     
+                if (comparePassword(password, hashpassword)) {
+                    // save session
+                    session = req.session;
+                    session.userid = username;
+                    
                     let array = JSON.stringify(['test1', 'test2']);
-                    return res.redirect("/profiles?username=" + encodeURIComponent(username)+"&created="+encodeURIComponent(datecreated)+"&array="+encodeURIComponent(array))
-                    // return res.redirect(url.format({
-                    //     pathname: "/profiles",
-                    //     query: {
-                    //         "username": username,
-                    //         "created": datecreated,
-                    //         "array": array
-                    //     }
-                    // }));
-                    // res.render('pages/profiles', {username: username});
-                    // const query = querystring
-                    // return res.redirect('/profiles', {username: username});
+                    return res.redirect("/profiles?username=" + encodeURIComponent(username)+"&created="+encodeURIComponent(datecreated)+"&array="+encodeURIComponent(array));    
+                } else {
+                    console.log('Wrong password');
+                    res.render('pages/login');
                 }
             } else {
                 console.log('No profile found for ' + username);
@@ -106,6 +128,8 @@ app.post('/login', function(req, res) {
 
 // sign up page 
 app.get('/signup', function(req, res) {
+    // to remove session
+    req.session.destroy();
     res.render('pages/signup');
 });
 
@@ -115,28 +139,21 @@ app.post('/signup', function(req, res) {
     var password = req.body['password'];
     
     if (password == '' ||username == '') {
-        console.log('No username and/or password');
         res.render('pages/signup');
     } else {
-        console.log('Signing Up');
-        console.log('username: ' + username + '  password: ' + password);
-        var query = "SELECT * FROM login where username = '" + username + "';"; 
-        con.query(query, function(err, result) {
+        con.query("SELECT * FROM login where username = '" + username + "';", function(err, result) {
             if (err) {
-                console.log('Query: ' + err);
+                ErrorAudit(err);
                 res.render('pages/signup');
             } 
             if (result.length > 0) {
-                console.log(username + ' is already in the systems.');
+                console.logc(username + ' is already in the systems.');
                 res.render('pages/signup');
             } else {
-                var error = hashPassword(username, password);
-                if(error) {
-                    console.log('Hashing' + err);
+                if(hashPassword(username, password)) {
                     res.render('pages/signup');
                 } else {
-                    // return res.redirect('/login');
-                    // res.render('pages/login')
+                    return res.redirect('/');
                 }
             }
         });
@@ -145,50 +162,58 @@ app.post('/signup', function(req, res) {
 
 // Log In
 app.get('/profiles', function(req,res) {
-    res.render('pages/profiles');
+    
+    // This will render and serve from the client if they have login. 
+    session = req.session;
+    if(session.userid) {
+        res.render('pages/profiles');
+    } else {
+        return res.redirect('/');
+    }
 });
 
+app.post('/profiles', function(req,res) {
+    req.session.destroy();
+    return res.redirect('/');
+});
 
-function hashPassword(username, password) {
-    console.log('Enter hashpassword');
+function hashPassword(username, password) {   
     var error = false;
     bcrypt.hash(password, 10)
     .then(hashpassword => {
-        console.log('Hashing the password entered');
-        const date =  new Date().toJSON().slice(0, 10).replaceAll('-', '');
-        var query = "INSERT INTO login(username, password, created) VALUES('" + username + "', '" + hashpassword + "', " + date + ")";
-        console.log(query);
-        con.query(query, function(err, result) {
-            if(err) {
-                error = true;
-                console.log('Insert: ' + err);
-                return error;
-            } else {
-                console.log(result);
+        con.query("INSERT INTO login(username, password, created) VALUES('" + username + "', '" + hashpassword + "', " + new Date().toJSON().slice(0, 10).replaceAll('-', '') + ")", function(err, result) {
+            if(err) { 
+                error = true; 
+                ErrorAudit(err);
+            } 
+            else { 
+                if(!(result)) {
+                    error = true;
+                    ErrorAudit("Failed at hash password");
+                } 
             }
-        })
-    })
-    .catch(err => {
+        });
+    }).catch(err => {
         error = true;
-        console.log('Error Hashing:' + err);
-        return error;
-    })
-
+        ErrorAudit(err);
+    });
     return error;
 }
 
 function comparePassword(password, hashPassword) {
-    console.log('Enter compare password');
-    var error = false;
-    bcrypt.compare(password, hashPassword)
-    .then(result => {
-        console.log('result: ' + result);
-    })
-    .catch(err => {
-        error = true;
-        console.log('Compare password: ' + err);
-        return error;
-    })
+    var result = bcrypt.compareSync(password, hashPassword);
+    return result;
+}
 
-    return error;
+function ErrorAudit(error) {
+    var date = new Date();
+    var current_date = date.toJSON().slice(0, 10).replaceAll('-', '');
+    var current_time = date.getHours() + "" + date.getMinutes() + "" + date.getSeconds();
+
+    console.log("INSERT INTO error(error_message, date_created, time_created) VALUES('"+error+"',"+current_date+","+current_time+");")
+    con.query("INSERT INTO error(" + error + "," + current_date + "," + current_time + ") VALUES('"+error+"',"+current_date+","+current_time+");", function(err, result) {
+        if(err) {console.log("Error to insert to error file.");}
+        if(!(result)) {console.log("Failed to insert to error file.");}
+    });
+
 }

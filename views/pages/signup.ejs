@@ -4,13 +4,44 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="#">
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/style.css">
         <title>Sign Up </title>
     </head>
-    <body>                 
-        <form action="/signup" method="post">
-            <input placeholder="username" name="username" type="text"/>
-            <input placeholder="password" name="password" type="password"/>
-            <button>Sign Up</button>
-        </form>     
+    <body>    
+        <div class="container">
+            <div style="margin-top: 30%;" align="center">
+                <div style="width: 300px; padding: 50px; background-color: #eee; border: 1px #eee; box-shadow: 2px 2px 4px #000000;" >                   
+                    <form action="/signup" method="POST">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input style="width: 200px; margin-bottom: 10px;" placeholder="username" name="username" type="text" id="username"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input style="width: 200px; margin-bottom: 10px;" placeholder="password" name="password" type="password"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>        
+                                        <button style="width: 200px; margin-bottom: 10px;">Sign Up</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="margin-top: 20px" align="center">
+                                            <a href="/">Sign In</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>       
+            </div>
+        </div>                 
     </body>
 </html>  
