@@ -177,6 +177,15 @@ app.post('/profiles', function(req,res) {
     return res.redirect('/');
 });
 
+app.get('/games/snake', function(req, res) {
+    session = req.session;
+    if(session.userid) {
+        res.render('pages/games/snake');
+    } else {
+        return res.redirect('/');
+    }
+});
+
 function hashPassword(username, password) {   
     var error = false;
     bcrypt.hash(password, 10)
