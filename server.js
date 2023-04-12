@@ -43,7 +43,7 @@ app.use(session({
     secret: '80rnin194nC1ty', // random key to aunthenticate a session. This is stored in environment variable and cant be exposed to the public
     resave: false, // enbales to store back to the session store even if the session was never modified during the request
     saveUninitialized: true, // prevents the browser from using empty session. Allow session to be sent to the store
-    cookie: {maxAge: 3600000 } // By Millisecond. Browser will dete cookie after the set duration elapse
+    cookie: {maxAge: 36000000 } // By Millisecond. Browser will dete cookie after the set duration elapse
 }))
 
 var session; // a variable to save a session
@@ -103,24 +103,30 @@ app.post('/', function(req, res) {
             if (err) {
                 ErrorAudit(err);
                 res.render('pages/login');
-            } 
-            if (result.length > 0) {
-                var hashpassword = result[0]['password'];
-                var datecreated = result[0]['created'];     
-                if (comparePassword(password, hashpassword)) {
-                    // save session
-                    session = req.session;
-                    session.userid = username;
-                    
-                    let array = JSON.stringify(['test1', 'test2']);
-                    return res.redirect("/profiles?username=" + encodeURIComponent(username)+"&created="+encodeURIComponent(datecreated)+"&array="+encodeURIComponent(array));    
-                } else {
-                    console.log('Wrong password');
+            } else  {
+                if (result ===  undefined) {
+                    console.log('No username found under ' + username  + '.');
                     res.render('pages/login');
+                } else {
+                    if (result.length > 0) {
+                        var hashpassword = result[0]['password'];
+                        var datecreated = result[0]['created'];     
+                        if (comparePassword(password, hashpassword)) {
+                            // save session
+                            session = req.session;
+                            session.userid = username;
+                            
+                            let array = JSON.stringify(['test1', 'test2']);
+                            return res.redirect("/profiles?username=" + encodeURIComponent(username)+"&created="+encodeURIComponent(datecreated)+"&array="+encodeURIComponent(array));    
+                        } else {
+                            console.log('Wrong password');
+                            res.render('pages/login');
+                        }
+                    } else {
+                        console.log('No profile found for ' + username);
+                        res.render('pages/login');
+                    }
                 }
-            } else {
-                console.log('No profile found for ' + username);
-                res.render('pages/login');
             }
         });
     }    
@@ -162,7 +168,6 @@ app.post('/signup', function(req, res) {
 
 // Log In
 app.get('/profiles', function(req,res) {
-    
     // This will render and serve from the client if they have login. 
     session = req.session;
     if(session.userid) {
@@ -220,7 +225,7 @@ function ErrorAudit(error) {
     var current_time = date.getHours() + "" + date.getMinutes() + "" + date.getSeconds();
 
     console.log("INSERT INTO error(error_message, date_created, time_created) VALUES('"+error+"',"+current_date+","+current_time+");")
-    con.query("INSERT INTO error(" + error + "," + current_date + "," + current_time + ") VALUES('"+error+"',"+current_date+","+current_time+");", function(err, result) {
+    con.query("INSERT INTO error(error_message, date_created, time_created) VALUES('"+error+"',"+current_date+","+current_time+");", function(err, result) {
         if(err) {console.log("Error to insert to error file.");}
         if(!(result)) {console.log("Failed to insert to error file.");}
     });

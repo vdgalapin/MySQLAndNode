@@ -20,13 +20,13 @@ let intervalTime = 0;
 let interval = 0;
 
 up.addEventListener("click", () => direction = -width);
-down.addEventListener("click", () => direction = +width);
+down.addEventListener("click", () => direction = width);
 left.addEventListener("click", () => direction = -1);
 right.addEventListener("click", () => direction = 1);
 
 
 document.addEventListener("DOMContentLoaded", function() {
-    document.addEventListener("keyup", control);
+    document.onkeydown = control;
     createBoard();
     startGame();
     playAgain.addEventListener("click", replay);
@@ -34,8 +34,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function createBoard() {
     popup.style.display = 'none';
-    for(let i = 0; i < width * width; i++) {
+    for(let i = 0; i < 100; i++) {
         let div = document.createElement('div');
+        div.id = i;
         grid.appendChild(div);
     }
 }
@@ -65,6 +66,8 @@ function moveOutcome() {
         popup.style.display = "flex";
         return clearInterval(interval);
     } else {
+        // console.log(currentSnake);
+        // console.log(direction);
         moveSnake(squares);
     }
 }
@@ -122,12 +125,13 @@ function randomApple(squares) {
         appleIndex = Math.floor(Math.random() * squares.length); 
     } while(squares[appleIndex].classList.contains("snake"));
 
-    squares[appleIndex].classList.add("appe");
+    squares[appleIndex].classList.add("apple");
 
 }
 
 
 function control(e) {
+    console.log('key: ' + e);
     if (e.keycode === 39) {
         direction = 1; // right
     } else if(e.keycode === 38) {
@@ -137,6 +141,7 @@ function control(e) {
     } else if (e.keycode == 40) {
         direction = +width // down
     }
+
 }
 
 function replay() {
