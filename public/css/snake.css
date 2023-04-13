@@ -1,11 +1,15 @@
 .grid {
-    width: 302px;
-    height: 302px;
+    width: 305px;
+    height: 305px;
     border: 1px solid black;
     margin: 0px auto;
     display: flex;
     flex-wrap: wrap;
 
+}
+
+.controls button {
+    width: 100px;
 }
 
 .grid div {
@@ -15,6 +19,7 @@
 
 .snake {
     background: green;
+    border: 1px solid green;
 }
 
 .apple {
@@ -24,12 +29,14 @@
 
 .popup {
     background: #eee;
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     position: fixed;
-    top: 45%;
-    left: 45%;
+    top: 46.5%;
+    left: 46.5%;
     display: flex;
     justify-content: center;
     align-items: center; 
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px #000000;    
 }

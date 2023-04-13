@@ -132,13 +132,13 @@ function randomApple(squares) {
 
 function control(e) {
     console.log('key: ' + e);
-    if (e.keycode === 39) {
+    if (e.keyCode === 39) {
         direction = 1; // right
-    } else if(e.keycode === 38) {
+    } else if(e.keyCode === 38) {
         direction = -width // up
-    } else if (e.keycode === 37) {
+    } else if (e.keyCode === 37) {
         direction = -1 // left
-    } else if (e.keycode == 40) {
+    } else if (e.keyCode == 40) {
         direction = +width // down
     }
 

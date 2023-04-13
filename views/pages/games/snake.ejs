@@ -1,31 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" href="#">
-        <link rel="stylesheet" href="./../css/bootstrap.min.css">
-        <link rel="stylesheet" href="/css/style.css">
-        <link rel="stylesheet" href="/css/snake.css">
-        <title>Snake</title>
-    </head>
-    <body>
-        <div class="container">
-            <div  style="margin-top: 30%;" align="center">
-                <div class="scoredisplay"></div>
-                <div class="grid"></div>
-                <div class="controls">
-                    <button class="left">Left</button>
-                    <button class="up">Up</button>
-                    <button class="right">Right</button>
-                    <button class="down">Down</button>
-                </div>
-                <div class="popup">
-                    <button class="playAgain">Play Again</button>
-                </div>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="./../css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/snake.css">
+    <title>Snake</title>
+</head>
+
+<body>
+    <div class="container">
+        <div style="margin-top: 30%;" align="center">
+            <div > Score: <span class="scoredisplay"></span></div>
+            <div class="grid"></div>
+            <div class="controls">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td><button class="up">Up</button></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><button class="left">Left</button></td>
+                            <td><button class="down">Down</button></td>
+                            <td><button class="right">Right</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="popup">
+                <button class="playAgain">Play Again</button>
             </div>
         </div>
-        <script type="text/javascript" src="/javascript/snake.js"></script>
-    </body>
+    </div>
+    <script type="text/javascript" src="/javascript/snake.js"></script>
+</body>
 
-</html>  
+</html>

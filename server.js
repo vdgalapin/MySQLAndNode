@@ -88,7 +88,7 @@ app.get('/', function(req, res) {
     res.render('pages/login');
 });
 
-// loggin in
+// logging in
 app.post('/', function(req, res) {
 
     // this is possible because of express.urlencoded
@@ -177,7 +177,7 @@ app.get('/profiles', function(req,res) {
     }
 });
 
-app.post('/profiles', function(req,res) {
+app.get('/logout', function(req,res) {
     req.session.destroy();
     return res.redirect('/');
 });
