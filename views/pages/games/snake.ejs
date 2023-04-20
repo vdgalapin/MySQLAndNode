@@ -9,34 +9,70 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/snake.css">
     <title>Snake</title>
+
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
 </head>
 
 <body>
-    <div class="container">
-        <div style="margin-top: 30%;" align="center">
-            <div > Score: <span class="scoredisplay"></span></div>
-            <div class="grid"></div>
-            <div class="controls">
-                <table>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td><button class="up">Up</button></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><button class="left">Left</button></td>
-                            <td><button class="down">Down</button></td>
-                            <td><button class="right">Right</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="popup">
-                <button class="playAgain">Play Again</button>
+    <header>
+        <div class="container">
+             <div class="row">
+                  <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start col-6 col-md-3 col-sm-4">
+                       <ul class="nav col-12 col-log-auto me-lg-auto mb-2 justify-center mb-md-0 ">
+                            <li id = "logoHeader">
+                                 
+                            </li>
+                       </ul>
+                  </div>
+                  <div id="logoutOption" class="d-flex flex-row-reverse align-items-right justify-content-right col-6 col-md-9 col-sm-8">
+                      
+                  </div>
+             </div>
+        </div>
+   </header>
+   <main> 
+        <div class="container">
+            <div style="margin-top: 10%;" align="center">
+                <div > Score: <span class="scoredisplay"></span></div>
+                <div class="grid"></div>
+                <div class="controls">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td><button class="up">Up</button></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><button class="left">Left</button></td>
+                                <td><button class="down">Down</button></td>
+                                <td><button class="right">Right</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="popup">
+                    <button class="playAgain">Play Again</button>
+                </div>
             </div>
         </div>
+    </main>
+    <div style="display:none;">
+        <table>
+            <tbody>
+                <tr>
+                    <td>username</td>
+                    <td><input id="username" value="<%= username %>" /></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+    <!-- 04172023 Need this to run a babel script and have to be inside body for the form to load. -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel" src="/javascript/script.js" ></script>
     <script type="text/javascript" src="/javascript/snake.js"></script>
 </body>
 

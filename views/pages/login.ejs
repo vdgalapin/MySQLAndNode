@@ -6,27 +6,48 @@
         <link rel="shortcut icon" href="#">
         <link rel="stylesheet" href="./css/bootstrap.min.css">
         <link rel="stylesheet" href="/css/style.css">
+
+        <!-- Load React. -->
+        <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+        <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
         <title>Login </title>
     </head>
-    <body>       
+    <body>
+        <header>
+            <div class="container">
+                 <div class="row">
+                      <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start col-6 col-md-3 col-sm-4">
+                           <ul class="nav col-12 col-log-auto me-lg-auto mb-2 justify-center mb-md-0 ">
+                                <li id = "logoHeader">
+                                     
+                                </li>
+                           </ul>
+                      </div>
+                 </div>
+            </div>
+       </header>
         <div class="container">
             <div style="margin-top: 30%;" align="center">
-                <div style="width: 300px; padding: 50px; background-color: #eee; border: 1px #eee; box-shadow: 2px 2px 4px #000000;" >                   
+                <div
+                    style="width: 300px; padding: 50px; background-color: #eee; border: 1px #eee; box-shadow: 2px 2px 4px #000000;">
                     <form action="/" method="POST">
                         <table>
                             <tbody>
                                 <tr>
                                     <td>
-                                        <input style="width: 200px; margin-bottom: 10px;" placeholder="username" name="username" type="text" id="username"/>
+                                        <input style="width: 200px; margin-bottom: 10px;" placeholder="username"
+                                            name="username" type="text" id="username" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input style="width: 200px; margin-bottom: 10px;" placeholder="password" name="password" type="password"/>
+                                        <input style="width: 200px; margin-bottom: 10px;" placeholder="password"
+                                            name="password" type="password" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>        
+                                    <td>
                                         <button style="width: 200px; margin-bottom: 10px;">login</button>
                                     </td>
                                 </tr>
@@ -40,13 +61,19 @@
                             </tbody>
                         </table>
                     </form>
-                </div>       
+                </div>
             </div>
         </div>
+        <!-- 04172023 Need this to run a babel script and have to be inside body for the form to load. -->
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script type="text/babel" src="/javascript/script.js" ></script>
     </body>
     <script>
-        window.onload = function() {
-            document.getElementById("username").focus();
+        window.onload = function () {
+            document.getElementById("username").focus();        
         }
     </script>
-</html>  
+
+
+
+</html>

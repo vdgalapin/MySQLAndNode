@@ -113,11 +113,12 @@ app.post('/', function(req, res) {
                         var datecreated = result[0]['created'];     
                         if (comparePassword(password, hashpassword)) {
                             // save session
-                            session = req.session;
-                            session.userid = username;
+                            req.session = req.session;
+                            req.session.userid = username;
                             
-                            let array = JSON.stringify(['test1', 'test2']);
-                            return res.redirect("/profiles?username=" + encodeURIComponent(username)+"&created="+encodeURIComponent(datecreated)+"&array="+encodeURIComponent(array));    
+                            // let array = JSON.stringify(['test1', 'test2']);
+                            // return res.redirect("/profiles?username=" + encodeURIComponent(username)+"&created="+encodeURIComponent(datecreated)+"&array="+encodeURIComponent(array));    
+                            return res.redirect("/profiles");
                         } else {
                             console.log('Wrong password');
                             res.render('pages/login');
@@ -171,7 +172,21 @@ app.get('/profiles', function(req,res) {
     // This will render and serve from the client if they have login. 
     session = req.session;
     if(session.userid) {
-        res.render('pages/profiles');
+        var query = "SELECT game_name, game_description, game_made from games;"
+        con.query(query, function(err, result){
+            if(err) {
+                ErrorAudit(err);
+                return res.redirect('/');
+            } else {
+                if(result.length > 0) {
+                    console.log(result);
+                } else {
+                    console.log('No games');
+                }
+                res.render('pages/profiles', {games: result, username: req.session.userid});
+            }
+        })
+      
     } else {
         return res.redirect('/');
     }
@@ -185,11 +200,20 @@ app.get('/logout', function(req,res) {
 app.get('/games/snake', function(req, res) {
     session = req.session;
     if(session.userid) {
-        res.render('pages/games/snake');
+        res.render('pages/games/snake', {username: req.session.userid});
     } else {
         return res.redirect('/');
     }
 });
+
+app.post('/games/snake', function(req, res) {
+    session = req.session;
+    if(session.userid) {
+
+    } else {
+        return res.redirect('/');
+    }
+})
 
 function hashPassword(username, password) {   
     var error = false;
@@ -231,3 +255,4 @@ function ErrorAudit(error) {
     });
 
 }
+

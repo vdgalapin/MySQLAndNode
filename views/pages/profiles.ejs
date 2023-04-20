@@ -8,49 +8,71 @@
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <title>Profiles Database</title>
+
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light  ">
+    <header>
         <div class="container">
-            <a class="navbar-brand" onclick="home();">Welcome <span id="username"></span></a>
-            <a href="/logout">logout</a>
+             <div class="row">
+                  <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start col-6 col-md-3 col-sm-4">
+                       <ul class="nav col-12 col-log-auto me-lg-auto mb-2 justify-center mb-md-0 ">
+                            <li id = "logoHeader">
+                                 
+                            </li>
+                       </ul>
+                  </div>
+                  <div id="logoutOption" class="d-flex flex-row-reverse align-items-right justify-content-right col-6 col-md-9 col-sm-8">
+                      
+                  </div>
+             </div>
         </div>
-    </nav>
+    </header>
     <main>
+       
         <div class="album py-5 bg-body-tertiary">
-            <div class="container">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <div class="bd-placeholder-img card-img-top" width="100%" height="225" role="img"
-                                aria-label="Placeholder: Snake" preserveAspectRatio="xMidYmid" focusable="false">
-                                <title>Snake</title><img src="images/snake.PNG" style="object-fit: cover;" width="100%"
-                                    height="100%">
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">Snake Game similar to the old snake game in the nokia phones.</p>
-                                <div class="d-fex justify-content-between align-items-center">
-                                    <class="btn-group">
-                                        <a href="/games/snake">play</a>
-                                    </class>
+            <div class="container">                   
+                <div class="row ">
+                    <% games.forEach((game)=> {%> 
+                        <div class="col-4  g-3">
+                            <div class="card shadow-sm">
+                                <div class="bd-placeholder-img card-img-top" width="100%" height="225" role="img"
+                                    aria-label="Placeholder: Snake" preserveAspectRatio="xMidYmid" focusable="false">
+                                    <title><%= game.game_name %></title><img src="images/snake.PNG" style="object-fit: cover;" width="100%"
+                                        height="100%">
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text"><%= game.game_description %></p>
+                                    <div class="d-fex justify-content-between align-items-center">
+                                        <class="btn-group">
+                                            <a href="/games/<%= game.game_path %>">play</a>
+                                        </class>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    <% }); %>
                 </div>
             </div>
         </div>
-    </main>
+      
+
+    <div style="display:none;">
+        <table>
+            <tbody>
+                <tr>
+                    <td>username</td>
+                    <td><input id="username" value="<%= username %>" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- 04172023 Need this to run a babel script and have to be inside body for the form to load. -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel" src="/javascript/script.js" ></script>
 </body>
-<script>
-    var url = new URL(window.location.href).searchParams;
-    console.log(url.get("username"));
-    document.getElementById("username").innerHTML = url.get("username");
-
-    function home() {
-        location.reload();
-    }
-</script>
-
 </html>
