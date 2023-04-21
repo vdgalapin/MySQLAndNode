@@ -13,6 +13,8 @@
     <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+
+    
 </head>
 
 <body>
@@ -42,7 +44,7 @@
                             <div class="card shadow-sm">
                                 <div class="bd-placeholder-img card-img-top" width="100%" height="225" role="img"
                                     aria-label="Placeholder: Snake" preserveAspectRatio="xMidYmid" focusable="false">
-                                    <title><%= game.game_name %></title><img src="images/snake.PNG" style="object-fit: cover;" width="100%"
+                                    <title><%= game.game_name %></title><img src="images/<%= game.game_picture %>" style="object-fit: cover;" width="100%"
                                         height="100%">
                                 </div>
                                 <div class="card-body">
@@ -75,4 +77,5 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel" src="/javascript/script.js" ></script>
 </body>
+   
 </html>

@@ -172,14 +172,14 @@ app.get('/profiles', function(req,res) {
     // This will render and serve from the client if they have login. 
     session = req.session;
     if(session.userid) {
-        var query = "SELECT game_name, game_description, game_made from games;"
+        var query = "SELECT game_name, game_description, game_made, game_picture, game_path from games;"
         con.query(query, function(err, result){
             if(err) {
                 ErrorAudit(err);
                 return res.redirect('/');
             } else {
                 if(result.length > 0) {
-                    console.log(result);
+            
                 } else {
                     console.log('No games');
                 }
@@ -200,18 +200,35 @@ app.get('/logout', function(req,res) {
 app.get('/games/snake', function(req, res) {
     session = req.session;
     if(session.userid) {
-        res.render('pages/games/snake', {username: req.session.userid});
+        res.render('pages/games/snake', {username: req.session.userid, game_id: "1"});
     } else {
         return res.redirect('/');
     }
 });
 
-app.post('/games/snake', function(req, res) {
+
+
+app.post('/gamescore',function(req, res) {
     session = req.session;
     if(session.userid) {
+        var score = req.body.score;
+        var game_id = req.body.gameID;
+        var username = req.body.player;
+
+        var date = new Date();
+        var current_date = date.toJSON().slice(0, 10).replaceAll('-', '');
+        var current_time = date.getHours() + "" + date.getMinutes() + "" + date.getSeconds();
+
+        var query = "INSERT INTO scores(game_id, username, score, date_played, time_played) VALUES(" + game_id + ",'" + username + "', " + score + "," + current_date + "," + current_time + ");"
+        con.query(query, function(err, result) {
+            if(err) {
+                ErrorAudit(err);
+            }
+            
+        }) 
 
     } else {
-        return res.redirect('/');
+        
     }
 })
 
@@ -248,7 +265,6 @@ function ErrorAudit(error) {
     var current_date = date.toJSON().slice(0, 10).replaceAll('-', '');
     var current_time = date.getHours() + "" + date.getMinutes() + "" + date.getSeconds();
 
-    console.log("INSERT INTO error(error_message, date_created, time_created) VALUES('"+error+"',"+current_date+","+current_time+");")
     con.query("INSERT INTO error(error_message, date_created, time_created) VALUES('"+error+"',"+current_date+","+current_time+");", function(err, result) {
         if(err) {console.log("Error to insert to error file.");}
         if(!(result)) {console.log("Failed to insert to error file.");}

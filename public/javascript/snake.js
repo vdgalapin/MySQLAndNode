@@ -62,6 +62,7 @@ function startGame() {
 function moveOutcome() {
     let squares = document.querySelectorAll(".grid div");
     if(checkForHits(squares)) {
+        gameScoreKept()
         alert("you hit the wall!");
         popup.style.display = "flex";
         return clearInterval(interval);
@@ -149,4 +150,11 @@ function replay() {
     createBoard();
     startGame();
     popup.style.display = "none";
+}
+
+
+function gameScoreKept() {
+    if (score > 0 ) {
+        gameScore(score, document.getElementById("gameID").value, document.getElementById("username").value);
+    }
 }
