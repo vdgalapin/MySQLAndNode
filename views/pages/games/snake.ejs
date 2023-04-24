@@ -38,27 +38,52 @@
    </header>
    <main> 
         <div class="container">
-            <div style="margin-top: 10%;" align="center">
-                <div > Score: <span class="scoredisplay"></span></div>
-                <div class="grid"></div>
-                <div class="controls">
-                    <table>
+            <div class="row" align="center">
+                <div class="col-6 col-xs-12"style="margin-top: 10%;" align="center">
+                    <div > Score: <span class="scoredisplay"></span></div>
+                    <div class="grid"></div>
+                    <div class="controls">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td><button class="up">Up</button></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><button class="left">Left</button></td>
+                                    <td><button class="down">Down</button></td>
+                                    <td><button class="right">Right</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="popup">
+                        <button class="playAgain">Play Again</button>
+                    </div>
+                </div>
+                <div class="col-6 col-xs-12" id="scoresTable" style="display:none">
+                    <table id="HighScoreTable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    User
+                                </th>
+                                <th>
+                                    Score
+                                </th>
+                                <th>
+                                    Date
+                                </th>
+                                <th>
+                                    Time
+                                </th>
+                            </tr>
+                        </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td><button class="up">Up</button></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td><button class="left">Left</button></td>
-                                <td><button class="down">Down</button></td>
-                                <td><button class="right">Right</button></td>
-                            </tr>
+
                         </tbody>
                     </table>
-                </div>
-                <div class="popup">
-                    <button class="playAgain">Play Again</button>
                 </div>
             </div>
         </div>
@@ -80,8 +105,10 @@
     <!-- 04172023 Need this to run a babel script and have to be inside body for the form to load. -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel" src="/javascript/script.js" ></script>
-    
 </body>
     <script type="text/javascript" src="/javascript/score.js"></script>
     <script type="text/javascript" src="/javascript/snake.js"></script>
+    <script>
+        getHighScore(document.getElementById('gameID').value);
+    </script>
 </html>

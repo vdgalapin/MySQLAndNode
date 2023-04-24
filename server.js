@@ -206,8 +206,7 @@ app.get('/games/snake', function(req, res) {
     }
 });
 
-
-
+// Set score
 app.post('/gamescore',function(req, res) {
     session = req.session;
     if(session.userid) {
@@ -230,7 +229,26 @@ app.post('/gamescore',function(req, res) {
     } else {
         
     }
-})
+});
+
+// Get Scores
+app.get('/getHighScore', function(req, res) {
+    session = req.session;
+    if(session.userid) {
+      
+        var query = 'SELECT username, score, date_played, time_played FROM scores WHERE game_id = ' + req.query.gameID + ' ORDER BY score desc, date_played, time_played';
+        con.query(query, function(err, result) {
+            console.log(query);
+            if(err) {
+                ErrorAudit(err);
+            } else {
+                return res.send(result);
+            }
+            
+
+        })
+    }
+});
 
 function hashPassword(username, password) {   
     var error = false;
@@ -266,7 +284,7 @@ function ErrorAudit(error) {
     var current_time = date.getHours() + "" + date.getMinutes() + "" + date.getSeconds();
 
     con.query("INSERT INTO error(error_message, date_created, time_created) VALUES('"+error+"',"+current_date+","+current_time+");", function(err, result) {
-        if(err) {console.log("Error to insert to error file.");}
+        if(err) {console.log(err);}
         if(!(result)) {console.log("Failed to insert to error file.");}
     });
 
