@@ -28,6 +28,7 @@ right.addEventListener("click", () => direction = 1);
 document.addEventListener("DOMContentLoaded", function() {
     document.onkeydown = control;
     createBoard();
+    // return;
     startGame();
     playAgain.addEventListener("click", replay);
 })
@@ -155,6 +156,28 @@ function replay() {
 
 function gameScoreKept() {
     if (score > 0 ) {
+        inserToScoreTable();
         gameScore(score, document.getElementById("gameID").value, document.getElementById("username").value);
     }
+}
+
+function inserToScoreTable() {
+    $($("#HighScoreTable tbody tr .score").get().reverse()).each(function(index) {
+        var scores = this.children[0].innerHTML;
+        if (scores <= score) {
+
+            var date = new Date();
+            var current_date = date.toJSON().slice(0, 10).replaceAll('-', '');
+            var current_time = date.getHours() + "" + date.getMinutes() + "" + date.getSeconds();
+
+            var row = '<tr>' + 
+                '<th score="row"> <div align="center"> ' + document.getElementById("username").value + ' </div> </th>' +
+                '<td class="score"> <div align="center"> ' + score + ' </div> </td>' +
+                '<td> <div align="center"> ' + current_date  + ' </div> </td>' +
+                '<td> <div align="center"> ' + current_time + ' </div> </td>' +
+                '</tr>';
+            $(this).parent().after(row);
+            return;
+        }
+      });
 }

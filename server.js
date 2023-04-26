@@ -221,6 +221,7 @@ app.post('/gamescore',function(req, res) {
         var query = "INSERT INTO scores(game_id, username, score, date_played, time_played) VALUES(" + game_id + ",'" + username + "', " + score + "," + current_date + "," + current_time + ");"
         con.query(query, function(err, result) {
             if(err) {
+                console.log(query);
                 ErrorAudit(err);
             }
             
@@ -234,19 +235,15 @@ app.post('/gamescore',function(req, res) {
 // Get Scores
 app.get('/getHighScore', function(req, res) {
     session = req.session;
-    if(session.userid) {
-      
+    if(session.userid) { 
         var query = 'SELECT username, score, date_played, time_played FROM scores WHERE game_id = ' + req.query.gameID + ' ORDER BY score desc, date_played, time_played';
         con.query(query, function(err, result) {
-            console.log(query);
             if(err) {
                 ErrorAudit(err);
             } else {
                 return res.send(result);
-            }
-            
-
-        })
+            }      
+        });
     }
 });
 
