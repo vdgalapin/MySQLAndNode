@@ -206,6 +206,16 @@ app.get('/games/snake', function(req, res) {
     }
 });
 
+app.get('/games/dinosaur', function(req, res) {
+    session = req.session;
+    if(session.userid) {
+        res.render('pages/games/dinosaur', {username: req.session.userid, game_id: "5"});
+    } else {
+        return res.redirect('/');
+    }
+});
+
+
 // Set score
 app.post('/gamescore',function(req, res) {
     session = req.session;

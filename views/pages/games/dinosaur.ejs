@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="./../css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dinosaur.css">
+    <title>Dinosaur</title>
+
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+             <div class="row">
+                  <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start col-6 col-md-3 col-sm-4">
+                       <ul class="nav col-12 col-log-auto me-lg-auto mb-2 justify-center mb-md-0 ">
+                            <li id = "logoHeader">
+                                 
+                            </li>
+                       </ul>
+                  </div>
+                  <div id="logoutOption" class="d-flex flex-row-reverse align-items-right justify-content-right col-6 col-md-9 col-sm-8">
+                      
+                  </div>
+             </div>
+        </div>
+   </header>
+   <main> 
+        <div class="container">
+            <div class="row" align="center">
+                <div class="col-6 col-xs-12"style="margin-top: 10%;" align="center">
+                    <div class="game">
+                        <div id="dino"></div>
+                        <div id="cactus"></div>
+                    </div>
+                </div>
+                <div class="col-6 col-xs-12" id="scoresTable" style="display:none; margin-top: 10%;" align="left">
+                    <table id="HighScoreTable" class="table table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th align="center">
+                                    User
+                                </th>
+                                <th align="center">
+                                    Score
+                                </th align="center">
+                                <th align="center">
+                                    Date
+                                </th>
+                                <th align="center">
+                                    Time
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div style="display:none;">
+        <table>
+            <tbody>
+                <tr>
+                    <td>username</td>
+                    <td><input id="username" value="<%= username %>" /></td>
+                </tr>
+                <tr>
+                    <td>Game ID</td>
+                    <td><input id="gameID" value="<%= game_id %>" />/td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- 04172023 Need this to run a babel script and have to be inside body for the form to load. -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel" src="/javascript/script.js" ></script>
+</body>
+    <script type="text/javascript" src="/javascript/score.js"></script>
+    <script type="text/javascript" src="/javascript/dinosaur.js"></script>
+    <script>
+        getHighScore(document.getElementById('gameID').value);
+    </script>
+</html>
