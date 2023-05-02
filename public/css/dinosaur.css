@@ -2,6 +2,7 @@
     width: 600px;
     height: 300px;
     border: 1px solid #000000;
+    margin: auto;
 }
 
 #dino {
@@ -10,7 +11,7 @@
     background-image: url(../images/dino.png);
     background-size: auto 70px;
     position: relative;
-    top: 243px;
+    top: 239px;
 }
 
 .jump {
@@ -19,19 +20,19 @@
 
 @keyframes jump {
     0% {
-        top: 243px;
+        top: 239px;
     }
     30% {
-        top: 215px;
+        top: 200px;
     }
     50% {
-        top: 170px;
+        top: 161px;
     }
     80% {
-        top: 215px;
+        top: 200px;
     }
     100% {
-        top: 243px;
+        top: 239px;
     }
 }
 
@@ -39,14 +40,14 @@
     width: 20px;
     height: 40px;
     position: relative;
-    top: 91px;
+    top: 239px;
     left: 580px;
     background-image: url(../images/cactus.png);
     background-size: 20px 40px;
     animation: cactus-block 1.2s infinite linear;
 }
 
-@keyframes cactus-bloc {
+@keyframes cactus-block {
     0% {
         left: 600px;
     }
