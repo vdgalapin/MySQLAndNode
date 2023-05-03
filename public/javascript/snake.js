@@ -1,6 +1,4 @@
 let grid = document.querySelector(".grid");
-let popup = document.querySelector(".popup");
-let playAgain = document.querySelector(".playAgain");
 let scoreDisplay = document.querySelector(".scoredisplay");
 
 let down = document.querySelector(".down");
@@ -30,11 +28,10 @@ document.addEventListener("DOMContentLoaded", function() {
     createBoard();
     // return;
     startGame();
-    playAgain.addEventListener("click", replay);
+    // playAgain.addEventListener("click", replay);
 })
 
 function createBoard() {
-    popup.style.display = 'none';
     for(let i = 0; i < 100; i++) {
         let div = document.createElement('div');
         div.id = i;
@@ -65,7 +62,7 @@ function moveOutcome() {
     if(checkForHits(squares)) {
         gameScoreKept()
         alert("you hit the wall!");
-        popup.style.display = "flex";
+        playGameAgain();
         return clearInterval(interval);
     } else {
         // console.log(currentSnake);
@@ -150,7 +147,6 @@ function replay() {
     grid.innerHTML = "";
     createBoard();
     startGame();
-    popup.style.display = "none";
 }
 
 

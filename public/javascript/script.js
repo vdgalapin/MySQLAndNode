@@ -38,7 +38,15 @@ function LogoutOption() {
 }
 ReactDOM.render(<LogoutOption />, document.getElementById("logoutOption"));
 
+function PlayAgainDiv() {
+     return (
+          <div class="popup" style="display:none;">
+               <button class="playAgain">Play Again</button>
+          </div>
+     );
+}
 
+ReactDOM.render(<PlayAgainDiv />, document.getElementById("PlayAgainDiv"));
 // class HeaderBar extends React.Component {
 //      render() {
 //           return (

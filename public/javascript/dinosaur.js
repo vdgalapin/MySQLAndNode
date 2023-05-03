@@ -8,7 +8,7 @@ function jump() {
         setTimeout(function() {
             dino.classList.remove("jump");
             // removes the jump class from dino once it has jump
-        }, 300);
+        }, 500);
     }
 }
 
@@ -21,10 +21,10 @@ let checkAlive = setInterval(function() {
         window.getComputedStyle(cactus).getPropertyValue("left")
     );
 
-    if(cactusLeft > 0 && cactusLeft < 70 && dinoTop >= 143) {
+    if(cactusLeft > 0 && cactusLeft < 60 && dinoTop >= 239) {
         dino.style.animationPlayState = "paused";
         cactus.style.animationPlayState = "paused";
-        alert("Whoops Game Over!");
+        // alert("Whoops Game Over!");
         // window.location.reload();
     }
 

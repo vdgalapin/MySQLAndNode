@@ -1,0 +1,14 @@
+
+.popup {
+    background: #eee;
+    width: 150px;
+    height: 150px;
+    position: fixed;
+    top: 46.5%;
+    left: 46.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px #000000;    
+}

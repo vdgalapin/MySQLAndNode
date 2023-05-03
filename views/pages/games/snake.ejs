@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./../css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/snake.css">
+    <link rel="stylesheet" href="/css/play_again.css">
     <title>Snake</title>
 
     <!-- Load React. -->
@@ -58,10 +59,10 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="popup">
-                        <button class="playAgain">Play Again</button>
+                    <div id="PlayAgainDiv">
+                    
                     </div>
-                </div>
+                </div>       
                 <div class="col-6 col-xs-12" id="scoresTable" style="display:none; margin-top: 10%;" align="left">
                     <table id="HighScoreTable" class="table table-striped">
                         <thead class="table-dark">
@@ -107,7 +108,9 @@
     <script type="text/babel" src="/javascript/script.js" ></script>
 </body>
     <script type="text/javascript" src="/javascript/score.js"></script>
+    <script type="text/javascript" src="/javascript/play_again.js"></script>
     <script type="text/javascript" src="/javascript/snake.js"></script>
+    
     <script>
         getHighScore(document.getElementById('gameID').value);
     </script>

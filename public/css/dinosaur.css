@@ -15,7 +15,7 @@
 }
 
 .jump {
-    animation: jump 0.3s linear;
+    animation: jump 0.5s linear;
 }
 
 @keyframes jump {
@@ -44,7 +44,7 @@
     left: 580px;
     background-image: url(../images/cactus.png);
     background-size: 20px 40px;
-    animation: cactus-block 1.2s infinite linear;
+    animation: cactus-block 1.5s infinite linear;
 }
 
 @keyframes cactus-block {
