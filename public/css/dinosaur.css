@@ -40,8 +40,8 @@
     width: 20px;
     height: 40px;
     position: relative;
-    top: 239px;
-    left: 580px;
+    top: 186px;
+    left: 550px;
     background-image: url(../images/cactus.png);
     background-size: 20px 40px;
     animation: cactus-block 1.5s infinite linear;
@@ -52,7 +52,7 @@
         left: 600px;
     }
     100% {
-        left: -20px;
+        left: -10px;
     }
 }
 

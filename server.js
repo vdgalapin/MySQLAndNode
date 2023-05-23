@@ -246,7 +246,7 @@ app.post('/gamescore',function(req, res) {
 app.get('/getHighScore', function(req, res) {
     session = req.session;
     if(session.userid) { 
-        var query = 'SELECT username, score, date_played, time_played FROM scores WHERE game_id = ' + req.query.gameID + ' ORDER BY score desc, date_played, time_played';
+        var query = 'SELECT username, score, date_played, time_played FROM scores WHERE game_id = ' + req.query.gameID + ' ORDER BY score desc, date_played, time_played LIMIT 10';
         con.query(query, function(err, result) {
             if(err) {
                 ErrorAudit(err);

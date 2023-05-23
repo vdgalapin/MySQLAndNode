@@ -1,8 +1,13 @@
-let popup = document.querySelector(".popup");
-let playAgain = document.querySelector(".playAgain");
+
+
 
 function playGameAgain() {
+    let popup = document.querySelector(".popup");
     popup.style.display = "flex";
 }
 
-playAgain.addEventListener("click", replay);
+
+// document.addEventListener("DOMContentLoaded", function() {
+//     let playAgain = document.querySelector(".playAgain");
+//     playAgain.addEventListener("click", replay);
+// })

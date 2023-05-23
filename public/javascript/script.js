@@ -1,4 +1,3 @@
-
 function websiteState() {
      return window.location.href;
 }
@@ -40,13 +39,14 @@ ReactDOM.render(<LogoutOption />, document.getElementById("logoutOption"));
 
 function PlayAgainDiv() {
      return (
-          <div class="popup" style="display:none;">
-               <button class="playAgain">Play Again</button>
+          <div style={{display:"none"}} class="popup">
+               <button class="playAgain" onClick={replay}>Play Again</button>
           </div>
      );
 }
 
-ReactDOM.render(<PlayAgainDiv />, document.getElementById("PlayAgainDiv"));
+ReactDOM.render(<PlayAgainDiv />, document.getElementById("playagainOption"));
+
 // class HeaderBar extends React.Component {
 //      render() {
 //           return (

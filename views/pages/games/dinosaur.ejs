@@ -41,11 +41,16 @@
         <div class="container">
             <div class="row" align="">
                 <div class="col-6 col-xs-12"style="margin-top: 10%;" align="">
+                    <div style="margin-left: 15px;"> Score: <span class="scoredisplay"></span></div>
                     <div class="game">
                         <div id="dino"></div>
                         <div id="cactus"></div>
                     </div>
+                    <div id="playagainOption">
+                    
+                    </div>
                 </div>
+                
                 <div class="col-6 col-xs-12" id="scoresTable" style="display:none; margin-top: 10%;" align="left">
                     <table id="HighScoreTable" class="table table-striped">
                         <thead class="table-dark">
@@ -91,6 +96,7 @@
     <script type="text/babel" src="/javascript/script.js" ></script>
 </body>
     <script type="text/javascript" src="/javascript/score.js"></script>
+    <script type="text/javascript" src="/javascript/play_again.js"></script>
     <script type="text/javascript" src="/javascript/dinosaur.js"></script>
     <script>
         getHighScore(document.getElementById('gameID').value);

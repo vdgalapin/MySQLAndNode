@@ -26,7 +26,6 @@ right.addEventListener("click", () => direction = 1);
 document.addEventListener("DOMContentLoaded", function() {
     document.onkeydown = control;
     createBoard();
-    // return;
     startGame();
     // playAgain.addEventListener("click", replay);
 })
@@ -65,8 +64,6 @@ function moveOutcome() {
         playGameAgain();
         return clearInterval(interval);
     } else {
-        // console.log(currentSnake);
-        // console.log(direction);
         moveSnake(squares);
     }
 }
@@ -144,6 +141,8 @@ function control(e) {
 }
 
 function replay() {
+    let popup = document.querySelector(".popup");
+    popup.style.display = "none";
     grid.innerHTML = "";
     createBoard();
     startGame();

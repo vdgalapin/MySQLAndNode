@@ -1,4 +1,13 @@
 
+
+.popup .hide {
+    display: none;
+}
+
+.popup .show {
+    display: block;
+}
+
 .popup {
     background: #eee;
     width: 150px;
